@@ -9,13 +9,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import gerenciamentoTarefas_db.dto.TarefasRequest;
 import gerenciamentoTarefas_db.dto.TarefasResponse;
 import gerenciamentoTarefas_db.service.TarefaService;
 import jakarta.validation.Valid;
 
-@Controller
+@RestController
+@RequestMapping("/tarefas")
 public class TarefaController {
     
     public final TarefaService service;
