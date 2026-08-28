@@ -72,5 +72,26 @@ public class TarefaService {
                                 tarefa.getStatus(),
                                 tarefa.getDataCriacao());
     }
+
+    //Atualizar
+    public TarefasResponse atualizar(Long id, TarefasRequest dto){
+
+        Tarefa tarefa = repository.findById(id)
+                                    .orElseThrow(() -> new TarefaNaoEncontradaException("id não encontrado"));
+                    
+        tarefa.setTitulo(dto.getTitulo());
+        tarefa.setDescricao(dto.getDescricao());
+        tarefa.setPrioridade(dto.getPrioridade());
+        tarefa.setStatus(dto.getStatus());
+        tarefa.setDataCriacao(dto.getDataCriacao());
+
+        return new TarefasResponse(
+                                tarefa.getId(),
+                                tarefa.getTitulo(),
+                                tarefa.getDescricao(),
+                                tarefa.getPrioridade(),
+                                tarefa.getStatus(),
+                                tarefa.getDataCriacao());
+    }
     
 }
