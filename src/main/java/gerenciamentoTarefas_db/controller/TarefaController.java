@@ -1,8 +1,16 @@
 package gerenciamentoTarefas_db.controller;
 
-import org.springframework.stereotype.Controller;
+import java.util.List;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import gerenciamentoTarefas_db.dto.TarefasRequest;
+import gerenciamentoTarefas_db.dto.TarefasResponse;
 import gerenciamentoTarefas_db.service.TarefaService;
+import jakarta.validation.Valid;
 
 @Controller
 public class TarefaController {
@@ -14,4 +22,13 @@ public class TarefaController {
     }
 
     
+    @GetMapping
+    public List<TarefasResponse> listar(){
+        return service.listar();
+    }
+
+    @PostMapping
+    public TarefasResponse cadastrar(@Valid @RequestBody TarefasRequest dto){
+        return service.cadastrar(dto);
+    }
 }

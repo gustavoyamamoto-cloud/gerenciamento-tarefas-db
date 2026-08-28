@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import gerenciamentoTarefas_db.dto.TarefasRequest;
 import gerenciamentoTarefas_db.dto.TarefasResponse;
 import gerenciamentoTarefas_db.model.Tarefa;
 import gerenciamentoTarefas_db.repository.TarefaRepository;
@@ -31,6 +32,29 @@ public class TarefaService {
                                 t.getStatus(),
                                 t.getDataCriacao()))
                             .toList();
+    }
+
+
+    //Cadastrar
+    public TarefasResponse cadastrar(TarefasRequest dto){
+
+        Tarefa tarefa = new Tarefa();
+
+        tarefa.setTitulo(dto.getTitulo());
+        tarefa.setDescricao(dto.getDescricao());
+        tarefa.setPrioridade(dto.getPrioridade());
+        tarefa.setStatus(dto.getStatus());
+        tarefa.setDataCriacao(dto.getDataCriacao());
+
+        repository.save(tarefa);
+
+        return new TarefasResponse(
+                                tarefa.getId(),
+                                tarefa.getTitulo(),
+                                tarefa.getDescricao(),
+                                tarefa.getPrioridade(),
+                                tarefa.getStatus(),
+                                tarefa.getDataCriacao());
     }
     
 }
