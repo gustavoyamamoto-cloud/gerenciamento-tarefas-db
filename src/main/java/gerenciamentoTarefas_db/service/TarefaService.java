@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import gerenciamentoTarefas_db.dto.TarefasRequest;
 import gerenciamentoTarefas_db.dto.TarefasResponse;
+import gerenciamentoTarefas_db.exception.TarefaNaoEncontradaException;
 import gerenciamentoTarefas_db.model.Tarefa;
 import gerenciamentoTarefas_db.repository.TarefaRepository;
 
@@ -47,6 +48,21 @@ public class TarefaService {
         tarefa.setDataCriacao(dto.getDataCriacao());
 
         repository.save(tarefa);
+
+        return new TarefasResponse(
+                                tarefa.getId(),
+                                tarefa.getTitulo(),
+                                tarefa.getDescricao(),
+                                tarefa.getPrioridade(),
+                                tarefa.getStatus(),
+                                tarefa.getDataCriacao());
+    }
+
+    //Buscar
+    public TarefasResponse buscar(Long id){
+
+        Tarefa tarefa = repository.findById(id)
+                                    .orElseThrow(() -> new TarefaNaoEncontradaException("id não encontrado"));
 
         return new TarefasResponse(
                                 tarefa.getId(),

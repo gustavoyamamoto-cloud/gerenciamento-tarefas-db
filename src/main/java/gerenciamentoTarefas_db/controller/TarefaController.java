@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -30,5 +31,10 @@ public class TarefaController {
     @PostMapping
     public TarefasResponse cadastrar(@Valid @RequestBody TarefasRequest dto){
         return service.cadastrar(dto);
+    }
+
+    @GetMapping("/{id}")
+    public TarefasResponse buscar(@PathVariable Long id){
+        return service.buscar(id);
     }
 }
