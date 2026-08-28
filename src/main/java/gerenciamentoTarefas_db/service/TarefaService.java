@@ -85,6 +85,8 @@ public class TarefaService {
         tarefa.setStatus(dto.getStatus());
         tarefa.setDataCriacao(dto.getDataCriacao());
 
+        repository.save(tarefa);
+
         return new TarefasResponse(
                                 tarefa.getId(),
                                 tarefa.getTitulo(),
@@ -94,4 +96,11 @@ public class TarefaService {
                                 tarefa.getDataCriacao());
     }
     
+
+    //Delete
+    public void deletar(Long id){
+
+        buscar(id);
+        repository.deleteById(id);
+    }
 }
